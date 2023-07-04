@@ -76,9 +76,14 @@ ERROR recv_acc_byte_data(FILE*fp,acc_struct_raw*asr){
 acc_struct_decode parse_acc_speed(const acc_struct_raw*asr){
 	acc_struct_decode asd;
 	unsigned char     sum;
-	asd.acc_structor.accx = (short)((unsigned short)((asr->axh)<<8) | (unsigned short)asr->axl) / 32768.0 * 16.0 * 9.8;
-	asd.acc_structor.accy = (short)((unsigned short)((asr->ayh)<<8) | (unsigned short)asr->ayl) / 32768.0 * 16.0 * 9.8;
-	asd.acc_structor.accz = (short)((unsigned short)((asr->azh)<<8) | (unsigned short)asr->azl) / 32768.0 * 16.0 * 9.8;
+	// multiply g
+	//asd.acc_structor.accx = (short)((unsigned short)((asr->axh)<<8) | (unsigned short)asr->axl) / 32768.0 * 16.0 * 9.8;
+	//asd.acc_structor.accy = (short)((unsigned short)((asr->ayh)<<8) | (unsigned short)asr->ayl) / 32768.0 * 16.0 * 9.8;
+	//asd.acc_structor.accz = (short)((unsigned short)((asr->azh)<<8) | (unsigned short)asr->azl) / 32768.0 * 16.0 * 9.8;
+
+	asd.acc_structor.accx = (short)((unsigned short)((asr->axh)<<8) | (unsigned short)asr->axl) / 32768.0 * 16.0 ;
+	asd.acc_structor.accy = (short)((unsigned short)((asr->ayh)<<8) | (unsigned short)asr->ayl) / 32768.0 * 16.0 ;
+	asd.acc_structor.accz = (short)((unsigned short)((asr->azh)<<8) | (unsigned short)asr->azl) / 32768.0 * 16.0 ;
 	asd.acc_structor.t = (short)((unsigned short)((asr->th)<<8) | (unsigned short)asr->tl) / 100.0;
 	sum = (0x55 + 0x51 + asr->axh + asr->axl + asr->ayh + asr->ayl + asr->azh + asr->azl + asr->tl + asr->th) & 0xff;
 	

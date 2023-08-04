@@ -3,8 +3,8 @@
 int main(){
 	unsigned count = 0;
 	int      can_write = 0;
- 	char filename[20] = "./data/imu_l.txt";
- 	char outfile[20]  = "./data/imu_l_out.csv";
+ 	char filename[40] = "./data/1540_imu_l.txt";
+ 	char outfile[40]  = "./data/1540_imu_l_out.csv";
  	FILE * fp = fopen(filename,"r");
  	FILE * fp_out = fopen(outfile,"w");
  	unsigned char byte_data = 0;
